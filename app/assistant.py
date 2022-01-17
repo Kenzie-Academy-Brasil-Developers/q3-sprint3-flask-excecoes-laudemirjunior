@@ -1,4 +1,5 @@
 import os
+from pickle import TRUE
 from dotenv import load_dotenv
 from json import load, dump
 
@@ -16,7 +17,8 @@ def read():
         return load(json_file)
 
 def verify(database, email):
+    print(database)
     for user in database:
-        if user["email"] == email:
-            return False
-        return True
+        if user["email"] == email.lower():
+            return True
+    return False
