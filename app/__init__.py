@@ -11,7 +11,7 @@ def get_user():
 
     create()
 
-    return  jsonify(data= read())
+    return jsonify(data= read()), 200
 
 @app.post('/user')
 def post_user():
@@ -24,7 +24,7 @@ def post_user():
 
     try:
         if type(request_user['nome']) != str or type(request_user['email']) != str:
-         raise ValueError
+            raise ValueError
 
         name = request_user["nome"].title()
         email = request_user["email"].lower()
@@ -43,7 +43,7 @@ def post_user():
             "email": str(type(request_user['email'])).replace("<class '",'').replace("'>",'')
         }
     ]
-  }
+  }, 400
 
     except EmailError:
         return jsonify(error= "Email already exists."), 409
